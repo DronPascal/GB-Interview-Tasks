@@ -1,5 +1,25 @@
 <resources>
     <string name="app_name">TheMovieDb</string>
+
+    <!-- Movies Screen -->
+    <string name="movies_placeholder">Start typing in a search bar to find a movie</string>
+    <string name="error_unknown_on_download">Unexpected error while trying to fetch movies!</string>
+    <string name="search_error">Something went wrong when downloading videos. Please, check your connection and try again</string>
+    <string name="empty_result">No results matching your query</string>
+    <!-- Search View -->
+    <string name="hint_search_query">Enter search query…</string>
+        <!-- description -->
+    <string name="search_icon">Search icon</string>
+    <string name="content_cinema_poster">Cinema poster</string>
+
+
+
+
+
+
+
+
+
     <string name="title_activity_main">MainActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -9,4 +29,9 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="background_image">Background image</string>
+    <string name="user_score">User Score</string>
+    <string name="overview">Overview</string>
+    <string name="top_billed_cast">Top Billed Cast</string>
+
 </resources>

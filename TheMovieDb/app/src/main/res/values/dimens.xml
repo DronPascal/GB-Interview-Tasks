@@ -1,3 +1,11 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
+    <!-- General -->
+    <dimen name="size_tiny">4dp</dimen>
+    <dimen name="size_small">8dp</dimen>
+    <dimen name="size_medium">16dp</dimen>
+    <dimen name="size_normal">24dp</dimen>
+    <dimen name="size_big">32dp</dimen>
+    <dimen name="size_huge">48dp</dimen>
+    <dimen name="size_giant">64dp</dimen>
+
 </resources>

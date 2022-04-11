@@ -63,13 +63,13 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:2.38.1"
 
     // Navigation
-        // Java language implementation
+        // java language implementation
     implementation "androidx.navigation:navigation-fragment:$versions.nav_version"
     implementation "androidx.navigation:navigation-ui:$versions.nav_version"
-        // Kotlin
+        // kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$versions.nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$versions.nav_version"
-        // Testing Navigation
+        // testing navigation
     androidTestImplementation "androidx.navigation:navigation-testing:$versions.nav_version"
 
     // Retrofit
