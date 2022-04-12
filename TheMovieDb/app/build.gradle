@@ -31,6 +31,14 @@ android {
         }
     }
 
+    flavorDimensions "serverType"
+    productFlavors {
+        prod {
+            dimension "serverType"
+            buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
+        }
+    }
+
     buildFeatures {
         viewBinding true
     }
@@ -47,7 +55,7 @@ android {
 
 ext {
     versions = [
-            nav_version     : "2.4.2",
+            nav_version: "2.4.2",
     ]
 }
 
@@ -63,13 +71,13 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:2.38.1"
 
     // Navigation
-        // java language implementation
+    // java language implementation
     implementation "androidx.navigation:navigation-fragment:$versions.nav_version"
     implementation "androidx.navigation:navigation-ui:$versions.nav_version"
-        // kotlin
+    // kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$versions.nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$versions.nav_version"
-        // testing navigation
+    // testing navigation
     androidTestImplementation "androidx.navigation:navigation-testing:$versions.nav_version"
 
     // Retrofit
@@ -79,10 +87,17 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
 
     // Paging3
-    implementation "androidx.paging:paging-runtime-ktx:3.1.1"
+    implementation 'androidx.paging:paging-runtime:3.1.1'
+    implementation 'androidx.paging:paging-runtime-ktx:3.1.1'
 
     // Coil
     implementation("io.coil-kt:coil:2.0.0-rc02")
+
+    // Timber
+    implementation "com.jakewharton.timber:timber:5.0.1"
+
+    // DateTime
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
 
     // Test
     testImplementation 'junit:junit:4.13.2'
