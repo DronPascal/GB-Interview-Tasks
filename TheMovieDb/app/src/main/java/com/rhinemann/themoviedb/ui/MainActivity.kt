@@ -1,4 +1,4 @@
-package com.rhinemann.themoviedb.presentation
+package com.rhinemann.themoviedb.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +9,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.snackbar.Snackbar
 import com.rhinemann.themoviedb.R
 import com.rhinemann.themoviedb.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration

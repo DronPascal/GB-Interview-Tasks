@@ -1,4 +1,4 @@
-package com.rhinemann.themoviedb.presentation
+package com.rhinemann.themoviedb.ui.movie_details
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.rhinemann.themoviedb.R
-import com.rhinemann.themoviedb.databinding.FragmentMoviesBinding
+import com.rhinemann.themoviedb.databinding.FragmentMovieDetailsBinding
 
 /**
- * A simple [Fragment] subclass as the default destination in the navigation.
+ * A simple [Fragment] subclass as the second destination in the navigation.
  */
-class MoviesFragment : Fragment() {
+class MovieDetailsFragment : Fragment() {
 
-    private var _binding: FragmentMoviesBinding? = null
+    private var _binding: FragmentMovieDetailsBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -25,7 +25,7 @@ class MoviesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentMoviesBinding.inflate(inflater, container, false)
+        _binding = FragmentMovieDetailsBinding.inflate(inflater, container, false)
         return binding.root
 
     }
@@ -33,8 +33,8 @@ class MoviesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        binding.buttonSecond.setOnClickListener {
+            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
     }
 
