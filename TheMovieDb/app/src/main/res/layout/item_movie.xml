@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
-    tools:context="presentation.MoviesFragment"
+    tools:context=".ui.movies.MoviesFragment"
     android:foreground="?android:attr/selectableItemBackground"
     android:padding="@dimen/size_small"
     tools:layout_width="200dp">

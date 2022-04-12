@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="presentation.MoviesFragment">
+    tools:context=".ui.movies.MoviesFragment">
 
     <EditText
         android:id="@+id/et_search_input"
@@ -45,15 +45,15 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginHorizontal="@dimen/size_small"
-        android:clipToPadding="false"
         android:layout_marginTop="64dp"
+        android:clipToPadding="false"
+        android:orientation="vertical"
         android:paddingTop="@dimen/size_medium"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:orientation="vertical"
         app:spanCount="2"
         tools:listitem="@layout/item_movie" />
 
