@@ -9,11 +9,11 @@ import com.rhinemann.themoviedb.data.remote.retrofit.the_movie_db.model.page.Api
 /**
  * Created by dronpascal on 12.04.2022.
  */
-interface IMovieDataSource {
-
-    //suspend fun getMoviePagingSource(query: String): Result<ApiMoviesPage, Throwable>
+interface IMoviesDataSource {
 
     suspend fun searchMovies(query: String): Result<List<ApiMovie>, Throwable>
+
+    suspend fun getMoviePopular(page : Int): Result<List<ApiMovie>, Throwable>
 
     suspend fun getMovieDetails(id: MovieId): Result<ApiMovieDetailed, Throwable>
 

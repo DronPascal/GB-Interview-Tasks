@@ -15,13 +15,17 @@ import javax.inject.Inject
 /**
  * Created by dronpascal on 12.04.2022.
  */
-class MovieDataSource @Inject constructor(
+class MoviesDataSource @Inject constructor(
     private val moviesApi: MoviesApi
-) : IMovieDataSource {
+) : IMoviesDataSource {
 
     override suspend fun searchMovies(query: String): Result<List<ApiMovie>, Throwable> =
         runOperationCatching { moviesApi.searchMovie(query).results }
             .doOnError { error -> Timber.e("Search movies from server error", error) }
+
+    override suspend fun getMoviePopular(page: Int): Result<List<ApiMovie>, Throwable> =
+        runOperationCatching { moviesApi.getMoviePopular(page).results }
+            .doOnError { error -> Timber.e("Search popular movies from server error", error) }
 
     override suspend fun getMovieDetails(id: MovieId): Result<ApiMovieDetailed, Throwable> =
         runOperationCatching { moviesApi.getMovieDetails(id) }

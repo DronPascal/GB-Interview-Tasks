@@ -10,7 +10,7 @@ import java.io.IOException
 /**
  * Created by dronpascal on 12.04.2022.
  */
-class MoviePagingSource(
+class MoviesPagingSource(
     private val movieApi: MoviesApi,
     private val query: String
 ) : PagingSource<Int, ApiMovie>() {
@@ -19,7 +19,11 @@ class MoviePagingSource(
         val position = params.key ?: UNSPLASH_STARTING_PAGE_INDEX
 
         return try {
-            val response = movieApi.searchMovie(query, position)
+            val response = if (query.isNotBlank()) {
+                movieApi.searchMovie(query, position)
+            } else {
+                movieApi.getMoviePopular(position)
+            }
             val movies = response.results
 
             LoadResult.Page(

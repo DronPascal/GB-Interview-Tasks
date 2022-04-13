@@ -1,5 +1,6 @@
 package com.rhinemann.themoviedb.data.remote.retrofit.the_movie_db
 
+import androidx.paging.PagingSource
 import com.rhinemann.themoviedb.data.remote.retrofit.the_movie_db.model.MovieId
 import com.rhinemann.themoviedb.data.remote.retrofit.the_movie_db.model.credits.ApiMovieCredits
 import com.rhinemann.themoviedb.data.remote.retrofit.the_movie_db.model.detailed.ApiMovieDetailed
@@ -13,15 +14,14 @@ import retrofit2.http.Query
  */
 interface MoviesApi {
 
-//    @GET("search/movie")
-//    suspend fun getMoviePagingSource(
-//        @Query("query") query: String,
-//        @Query("page") page: Int = 1,
-//    ): PagingSource<Int, ApiMoviesPage>
-
     @GET("search/movie")
     suspend fun searchMovie(
         @Query("query") query: String,
+        @Query("page") page: Int = 1,
+    ): ApiMoviesPage
+
+    @GET("movie/popular")
+    suspend fun getMoviePopular(
         @Query("page") page: Int = 1,
     ): ApiMoviesPage
 
