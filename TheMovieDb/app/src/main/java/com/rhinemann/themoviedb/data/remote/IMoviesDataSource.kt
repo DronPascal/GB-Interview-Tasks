@@ -13,7 +13,7 @@ interface IMoviesDataSource {
 
     suspend fun searchMovies(query: String): Result<List<ApiMovie>, Throwable>
 
-    suspend fun getMoviePopular(page : Int): Result<List<ApiMovie>, Throwable>
+    suspend fun getMoviePopular(page: Int): Result<List<ApiMovie>, Throwable>
 
     suspend fun getMovieDetails(id: MovieId): Result<ApiMovieDetailed, Throwable>
 

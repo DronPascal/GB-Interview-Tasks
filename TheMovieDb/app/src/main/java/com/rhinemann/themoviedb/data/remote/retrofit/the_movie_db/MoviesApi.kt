@@ -1,6 +1,5 @@
 package com.rhinemann.themoviedb.data.remote.retrofit.the_movie_db
 
-import androidx.paging.PagingSource
 import com.rhinemann.themoviedb.data.remote.retrofit.the_movie_db.model.MovieId
 import com.rhinemann.themoviedb.data.remote.retrofit.the_movie_db.model.credits.ApiMovieCredits
 import com.rhinemann.themoviedb.data.remote.retrofit.the_movie_db.model.detailed.ApiMovieDetailed

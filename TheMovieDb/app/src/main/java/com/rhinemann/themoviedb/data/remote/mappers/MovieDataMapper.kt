@@ -53,7 +53,8 @@ private fun colorGradient(
     rgbColor1: Color,
     rgbColor2: Color,
     rgbColor3: Color?
-): String { var color1 = rgbColor1
+): String {
+    var color1 = rgbColor1
     var color2 = rgbColor2
     var fade = fadeFraction.toDouble() / 100
     // Do we have 3 colors for the gradient? Need to adjust the params.

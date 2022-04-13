@@ -52,7 +52,7 @@ class MovieAdapter(private val listener: OnItemClickListener) :
                     .load(movie.posterUrl)
                     .centerCrop()
                     .transition(DrawableTransitionOptions.withCrossFade())
-                    .error(R.drawable.ic_error)
+                    .error(R.drawable.ic_cinema)
                     .into(ivPoster)
 
                 tvName.text = movie.name

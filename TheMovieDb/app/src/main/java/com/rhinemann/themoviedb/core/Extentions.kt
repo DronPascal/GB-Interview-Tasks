@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -30,6 +31,21 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
         }
     })
 }
+
+inline fun EditText.onImeAction(crossinline action: (text: String) -> Unit) {
+    setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+        if ((event?.action == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+            action(text.toString())
+            return@OnKeyListener true
+        }
+        false
+    })
+    setOnEditorActionListener { _, _, _ ->
+        action(text.toString())
+        true
+    }
+}
+
 
 fun View.showSnackbar(
     @StringRes stringRes: Int,

@@ -19,13 +19,13 @@
 
     <fragment
         android:id="@+id/movieDetailsFragment"
-        android:name="com.rhinemann.themoviedb.ui.movie_details.MovieDetailsFragment"
+        android:name="com.rhinemann.themoviedb.ui.movie_details.view.MovieDetailsFragment"
         android:label="@string/details_fragment_label"
         tools:layout="@layout/fragment_movie_details">
 
         <argument
             android:name="movie"
-            app:argType="com.rhinemann.themoviedb.domain.models.Movie"/>
+            app:argType="com.rhinemann.themoviedb.domain.models.Movie" />
 
     </fragment>
 

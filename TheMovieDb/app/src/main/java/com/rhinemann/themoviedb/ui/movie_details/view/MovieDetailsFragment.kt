@@ -1,4 +1,4 @@
-package com.rhinemann.themoviedb.ui.movie_details
+package com.rhinemann.themoviedb.ui.movie_details.view
 
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -34,14 +34,14 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
                 .load(movie.posterUrl)
                 .centerCrop()
                 .transition(DrawableTransitionOptions.withCrossFade())
-                .error(R.drawable.ic_error)
+                .error(R.drawable.ic_cinema)
                 .into(ivPoster)
 
             Glide.with(requireContext())
                 .load(movie.backgroundUrl)
                 .centerCrop()
                 .transition(DrawableTransitionOptions.withCrossFade())
-                .error(R.drawable.ic_error)
+                .error(R.drawable.ic_cinema)
                 .into(ivBackground)
 
             tvName.text = movie.name

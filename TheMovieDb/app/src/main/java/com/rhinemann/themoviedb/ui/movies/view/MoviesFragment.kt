@@ -10,6 +10,8 @@ import androidx.paging.LoadState
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.rhinemann.themoviedb.R
 import com.rhinemann.themoviedb.core.afterTextChanged
+import com.rhinemann.themoviedb.core.hideKeyboard
+import com.rhinemann.themoviedb.core.onImeAction
 import com.rhinemann.themoviedb.databinding.FragmentMoviesBinding
 import com.rhinemann.themoviedb.domain.models.Movie
 import com.rhinemann.themoviedb.ui.movies.viewmodel.MoviesViewModel
@@ -24,10 +26,6 @@ class MoviesFragment : Fragment(R.layout.fragment_movies), MovieAdapter.OnItemCl
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_MoviesFragment_to_MovieDetailsFragment)
-        }
-
         initRecyclerView()
         initSearchView()
     }
@@ -35,15 +33,14 @@ class MoviesFragment : Fragment(R.layout.fragment_movies), MovieAdapter.OnItemCl
     private fun initSearchView() {
         with(binding.etSearchInput) {
             clearFocus()
-            binding.root.requestFocus()
+            binding.ivSearchIcon.requestFocus()
 
-            val onNewQuery = { query: String ->
+            afterTextChanged { query: String ->
                 binding.rvMovies.scrollToPosition(0)
                 viewModel.searchMovies(query)
                 this.clearFocus()
             }
-
-            afterTextChanged(onNewQuery)
+            onImeAction { hideKeyboard() }
         }
     }
 

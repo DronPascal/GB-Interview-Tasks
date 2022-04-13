@@ -11,12 +11,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TheMovieDb">
+        android:theme="@style/Theme.TheMovieDb.NoActionBar">
 
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
-            android:label="@string/title_activity_main"
             android:theme="@style/Theme.TheMovieDb.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden">
 
