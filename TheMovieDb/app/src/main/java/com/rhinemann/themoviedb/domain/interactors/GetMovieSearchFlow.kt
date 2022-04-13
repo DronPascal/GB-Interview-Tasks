@@ -5,7 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.rhinemann.themoviedb.data.local.core.MovieUrlProvider
-import com.rhinemann.themoviedb.data.remote.MoviePagingSource
+import com.rhinemann.themoviedb.data.remote.MoviesPagingSource
 import com.rhinemann.themoviedb.data.remote.mappers.toEntity
 import com.rhinemann.themoviedb.data.remote.retrofit.the_movie_db.MoviesApi
 import com.rhinemann.themoviedb.domain.models.Movie
@@ -30,7 +30,7 @@ class GetMovieSearchFlow @Inject constructor(
                 prefetchDistance = 20,
                 initialLoadSize = 40
             ),
-            pagingSourceFactory = { MoviePagingSource(movieApi, query) }
+            pagingSourceFactory = { MoviesPagingSource(movieApi, query) }
         ).flow
             .map { pagingData ->
                 pagingData.map { it.toEntity(urlProvider.baseImageUrl) }
