@@ -3,26 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/moviesFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.rhinemann.themoviedb.ui.movies.MoviesFragment"
-        android:label="@string/first_fragment_label"
+        android:id="@+id/moviesFragment"
+        android:name="com.rhinemann.themoviedb.ui.movies.view.MoviesFragment"
+        android:label="@string/movies_fragment_label"
         tools:layout="@layout/fragment_movies">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_MoviesFragment_to_MovieDetailsFragment"
+            app:destination="@id/movieDetailsFragment" />
+
     </fragment>
+
     <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/movieDetailsFragment"
         android:name="com.rhinemann.themoviedb.ui.movie_details.MovieDetailsFragment"
-        android:label="@string/second_fragment_label"
+        android:label="@string/details_fragment_label"
         tools:layout="@layout/fragment_movie_details">
 
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+        <argument
+            android:name="movie"
+            app:argType="com.rhinemann.themoviedb.domain.models.Movie"/>
+
     </fragment>
+
 </navigation>

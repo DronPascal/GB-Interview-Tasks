@@ -7,9 +7,9 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
-    tools:context=".ui.movies.MoviesFragment"
     android:foreground="?android:attr/selectableItemBackground"
     android:padding="@dimen/size_small"
+    tools:context=".ui.movies.view.MoviesFragment"
     tools:layout_width="200dp">
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -28,6 +28,7 @@
 
     <ProgressBar
         android:id="@+id/pb_rating"
+        style="@style/CircularDeterminateProgressBar"
         android:layout_width="40dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/size_medium"
@@ -38,7 +39,8 @@
         app:layout_constraintDimensionRatio="H,1:1"
         app:layout_constraintStart_toStartOf="@id/iv_poster"
         app:layout_constraintTop_toBottomOf="@id/iv_poster"
-        tools:progress="65" />
+        tools:progress="65"
+        tools:progressTint="#BFFF00" />
 
     <TextView
         android:id="@+id/tv_rating"
@@ -58,9 +60,9 @@
         android:id="@+id/tv_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_medium"
         android:ellipsize="end"
         android:maxLines="2"
-        android:layout_marginTop="@dimen/size_medium"
         android:textAppearance="?attr/textAppearanceHeadline6"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/tv_date"
@@ -72,9 +74,9 @@
     <TextView
         android:id="@+id/tv_date"
         android:layout_width="0dp"
-        android:maxLines="1"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/size_small"
+        android:maxLines="1"
         android:textAppearance="?attr/textAppearanceCaption"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

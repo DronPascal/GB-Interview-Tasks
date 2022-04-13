@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SearchStyle">
+        <item name="android:imeOptions">actionSearch</item>
+        <item name="android:inputType">text</item>
+        <item name="android:background">@drawable/bg_search</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:paddingStart">@dimen/size_big</item>
+        <item name="android:paddingEnd">@dimen/size_huge</item>
+        <item name="android:textColorHint">@color/black_alpha_60</item>
+        <item name="android:hint">@string/hint_search_query</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.CornerSize4Percent" parent="">
+        <item name="cornerSize">4%</item>
+    </style>
+
+    <style name="CircularDeterminateProgressBar">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/ring_shape</item>
+    </style>
+
+</resources>
