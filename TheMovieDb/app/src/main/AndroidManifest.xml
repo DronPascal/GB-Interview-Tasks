@@ -17,7 +17,8 @@
             android:name=".ui.MainActivity"
             android:exported="true"
             android:label="@string/title_activity_main"
-            android:theme="@style/Theme.TheMovieDb.NoActionBar">
+            android:theme="@style/Theme.TheMovieDb.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
