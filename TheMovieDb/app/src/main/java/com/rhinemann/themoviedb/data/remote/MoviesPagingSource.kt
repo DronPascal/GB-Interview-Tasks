@@ -5,7 +5,6 @@ import androidx.paging.PagingState
 import com.rhinemann.themoviedb.data.remote.retrofit.the_movie_db.MoviesApi
 import com.rhinemann.themoviedb.data.remote.retrofit.the_movie_db.model.page.ApiMovie
 import retrofit2.HttpException
-import timber.log.Timber
 import java.io.IOException
 
 /**
@@ -40,7 +39,6 @@ class MoviesPagingSource(
     }
 
     override fun getRefreshKey(state: PagingState<Int, ApiMovie>): Int? {
-        Timber.d("Position " + state.anchorPosition)
         return state.anchorPosition
     }
 

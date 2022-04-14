@@ -33,7 +33,7 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
 }
 
 inline fun EditText.onImeAction(crossinline action: (text: String) -> Unit) {
-    setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+    setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
         if ((event?.action == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
             action(text.toString())
             return@OnKeyListener true

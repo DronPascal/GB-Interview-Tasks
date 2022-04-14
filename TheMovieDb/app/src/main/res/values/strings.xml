@@ -15,7 +15,7 @@
     <string name="empty_result">No results matching your query</string>
     <string name="results_could_not_be_loaded">Results could not be loaded</string>
     <!-- Search View -->
-    <string name="hint_search_query">Enter search query…</string>
+    <string name="hint_search_query">Search movie…</string>
     <!-- description -->
     <string name="search_icon">Search icon</string>
     <string name="content_cinema_poster">Cinema poster</string>

@@ -14,7 +14,7 @@ import com.rhinemann.themoviedb.databinding.ItemMovieBinding
 import com.rhinemann.themoviedb.domain.models.Movie
 
 class MovieAdapter(private val listener: OnItemClickListener) :
-    PagingDataAdapter<Movie, MovieAdapter.PhotoViewHolder>(PHOTO_COMPARATOR) {
+    PagingDataAdapter<Movie, MovieAdapter.PhotoViewHolder>(MOVIE_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
         val binding =
@@ -32,7 +32,9 @@ class MovieAdapter(private val listener: OnItemClickListener) :
     }
 
     override fun getItemViewType(position: Int): Int {
-        return 1
+        return if ((position == itemCount || position == 0)
+            && (getItem(position) is Movie).not()
+        ) 2 else 1
     }
 
     inner class PhotoViewHolder(private val binding: ItemMovieBinding) :
@@ -74,7 +76,7 @@ class MovieAdapter(private val listener: OnItemClickListener) :
     }
 
     companion object {
-        private val PHOTO_COMPARATOR = object : DiffUtil.ItemCallback<Movie>() {
+        private val MOVIE_COMPARATOR = object : DiffUtil.ItemCallback<Movie>() {
             override fun areItemsTheSame(oldItem: Movie, newItem: Movie) =
                 oldItem.id == newItem.id
 

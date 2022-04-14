@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MovieDetailsViewModel @Inject constructor(
     private val getMovieDetailed: GetMovieDetailed,
-    savedStateHandle: SavedStateHandle,
+    @Suppress("UNUSED_PARAMETER") savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
     private val _state =
@@ -37,7 +37,7 @@ class MovieDetailsViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    fun onItemClick(cast: Cast) {
+    fun onItemClick(@Suppress("UNUSED_PARAMETER") cast: Cast) {
     }
 }
 

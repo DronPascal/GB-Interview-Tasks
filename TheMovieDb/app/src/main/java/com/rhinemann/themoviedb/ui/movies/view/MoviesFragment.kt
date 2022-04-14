@@ -32,8 +32,9 @@ class MoviesFragment : Fragment(R.layout.fragment_movies), MovieAdapter.OnItemCl
         MovieLoadStateAdapter { adapter.retry() }
     }
     private val footerAdapter by lazy(LazyThreadSafetyMode.NONE) {
-        headerAdapter
+        MovieLoadStateAdapter { adapter.retry() }
     }
+    private var prevQuery = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,7 +49,8 @@ class MoviesFragment : Fragment(R.layout.fragment_movies), MovieAdapter.OnItemCl
             binding.ivSearchIcon.requestFocus()
 
             afterTextChanged { query: String ->
-                if (query.isBlank()) return@afterTextChanged
+                if (query.isBlank() || query == prevQuery) return@afterTextChanged
+                prevQuery = query
                 binding.rvMovies.scrollToPosition(0)
                 viewModel.searchMovies(query)
                 this.clearFocus()
@@ -73,17 +75,19 @@ class MoviesFragment : Fragment(R.layout.fragment_movies), MovieAdapter.OnItemCl
                 footer = footerAdapter
             )
 
-            rvMovies.layoutManager = GridLayoutManager(requireContext(), spanCount).apply {
-                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                    override fun getSpanSize(position: Int): Int {
-                        return when (concatAdapter.getItemViewType(position)) {
-                            2 -> spanCount
-                            1 -> 1
-                            else -> -1
+            // TODO SpanSizeLookup doesn't work correctly
+            rvMovies.layoutManager = GridLayoutManager(requireContext(), spanCount)
+                .apply {
+                    spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                        override fun getSpanSize(position: Int): Int {
+                            return when (concatAdapter.getItemViewType(position)) {
+                                2 -> spanCount
+                                1 -> 1
+                                else -> -1
+                            }
                         }
                     }
                 }
-            }
             rvMovies.setHasFixedSize(true)
             rvMovies.itemAnimator = null
 
@@ -91,14 +95,6 @@ class MoviesFragment : Fragment(R.layout.fragment_movies), MovieAdapter.OnItemCl
         }
 
         adapter.addLoadStateListener { loadState ->
-            if (loadState.append.endOfPaginationReached) {
-                concatAdapter.addAdapter(headerAdapter)
-                concatAdapter.addAdapter(footerAdapter)
-            } else {
-                concatAdapter.removeAdapter(headerAdapter)
-                concatAdapter.removeAdapter(footerAdapter)
-            }
-
             binding.apply {
                 pbSearch.isVisible = loadState.source.refresh is LoadState.Loading
                 ivSearchIcon.isVisible = loadState.source.refresh is LoadState.NotLoading

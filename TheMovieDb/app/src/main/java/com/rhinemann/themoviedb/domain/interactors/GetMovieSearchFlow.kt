@@ -27,7 +27,7 @@ class GetMovieSearchFlow @Inject constructor(
                 pageSize = TMD_API_PAGE_SIZE,
                 maxSize = MAX_CACHED_PAGES * TMD_API_PAGE_SIZE,
                 enablePlaceholders = true,
-                prefetchDistance = TMD_API_PAGE_SIZE,
+                prefetchDistance = PREFETCH_PAGES_NUMBER * TMD_API_PAGE_SIZE,
                 initialLoadSize = INIT_LOAD_PAGES_NUMBER * TMD_API_PAGE_SIZE
             ),
             pagingSourceFactory = { MoviesPagingSource(movieApi, query) }
@@ -38,7 +38,8 @@ class GetMovieSearchFlow @Inject constructor(
 
     private companion object {
         const val TMD_API_PAGE_SIZE = 20
-        const val MAX_CACHED_PAGES = 3
-        const val INIT_LOAD_PAGES_NUMBER = 2
+        const val MAX_CACHED_PAGES = 12
+        const val PREFETCH_PAGES_NUMBER = 5
+        const val INIT_LOAD_PAGES_NUMBER = 5
     }
 }

@@ -11,4 +11,6 @@
     <color name="black_alpha_70">#B3000000</color>
     <color name="black_alpha_30">#4D000000</color>
     <color name="blue_alpha_70">#480F2F60</color>
+
+    <color name="search_tint">#00000000</color>
 </resources>

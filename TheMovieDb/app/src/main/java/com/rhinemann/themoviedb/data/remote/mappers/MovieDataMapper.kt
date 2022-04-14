@@ -8,6 +8,7 @@ import com.rhinemann.themoviedb.domain.models.MovieDetailed
 import okhttp3.internal.toHexString
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
+import java.util.*
 import kotlin.math.absoluteValue
 import kotlin.math.floor
 
@@ -17,7 +18,7 @@ import kotlin.math.floor
 
 internal fun ApiMovie.toEntity(baseImageUrl: String): Movie = Movie(
     id = this.id,
-    name = this.title.also { println(it) },
+    name = this.title,
     overview = this.overview,
     date = getFormatDate(this.release_date ?: ""),
     rating = getRating100(this.vote_average),
@@ -28,7 +29,7 @@ internal fun ApiMovie.toEntity(baseImageUrl: String): Movie = Movie(
 
 internal fun ApiMovieDetailed.toEntity(baseImageUrl: String): MovieDetailed = MovieDetailed(
     id = this.id,
-    name = this.title.also { println(it) },
+    name = this.title,
     overview = this.overview,
     date = getFormatDate(this.release_date ?: ""),
     runtime = getRuntimeText(this.runtime),
@@ -51,7 +52,7 @@ internal fun getImageUrl(baseImageUrl: String, imagePath: String?): String =
 private fun getFormatDate(text: String): String {
     if (text.isBlank() || text.isEmpty()) return ""
     val parsedDate = LocalDate.parse(text, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-    return parsedDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy"))
+    return parsedDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy").withLocale(Locale.US))
 }
 
 private fun getRating100(vote_average: Double): Int {
@@ -111,5 +112,5 @@ private fun colorGradient(
             else hexStr
     }
 
-    return result.also { println(it) }
+    return result
 }

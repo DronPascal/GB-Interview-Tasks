@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:minHeight="96dp">
 
     <ProgressBar
         android:id="@+id/progress_bar"
