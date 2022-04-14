@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:padding="@dimen/size_small"
+    tools:context=".ui.movies.view.MoviesFragment"
+    tools:layout_width="200dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_poster"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/content_cinema_poster"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@id/pb_rating"
+        app:layout_constraintDimensionRatio="H,2:3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize4Percent"
+        tools:src="@drawable/preview_movie" />
+
+    <ProgressBar
+        android:id="@+id/pb_rating"
+        style="@style/CircularDeterminateProgressBar"
+        android:layout_width="40dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/size_medium"
+        android:background="@drawable/circle_shape"
+        android:indeterminate="false"
+        android:max="100"
+        android:translationY="-24dp"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintStart_toStartOf="@id/iv_poster"
+        app:layout_constraintTop_toBottomOf="@id/iv_poster"
+        tools:progress="65"
+        tools:progressTint="#BFFF00" />
+
+    <TextView
+        android:id="@+id/tv_rating"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textAppearance="?attr/textAppearanceBody1"
+        android:textColor="@color/white"
+        android:translationY="-24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/pb_rating"
+        app:layout_constraintEnd_toEndOf="@+id/pb_rating"
+        app:layout_constraintStart_toStartOf="@+id/pb_rating"
+        app:layout_constraintTop_toTopOf="@+id/pb_rating"
+        tools:text="65" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_medium"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_poster"
+        tools:text="Spider Man: Homerun" />
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/size_small"
+        android:maxLines="1"
+        android:textAppearance="?attr/textAppearanceCaption"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_name"
+        tools:text="Dec 21, 2021" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

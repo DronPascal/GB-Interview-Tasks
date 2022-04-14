@@ -1,3 +1,33 @@
 <resources>
-    <string name="app_name">TheMovieDb</string>
+    <string name="app_name">The Movie Db</string>
+
+    <!-- General -->
+    <string name="retry">Retry</string>
+
+    <!-- Navigation labels -->
+    <string name="movies_fragment_label">Movies List Fragment</string>
+    <string name="details_fragment_label">Details Fragment</string>
+
+    <!-- Movies Screen -->
+    <string name="movies_start_type_smth">Start typing in a search bar to find a movie</string>
+    <string name="error_unknown_on_download">Unexpected error while trying to fetch movies!</string>
+    <string name="search_error">Something went wrong when downloading videos. Please, check your connection and try again</string>
+    <string name="empty_result">No results matching your query</string>
+    <string name="results_could_not_be_loaded">Results could not be loaded</string>
+    <!-- Search View -->
+    <string name="hint_search_query">Search movie…</string>
+    <!-- description -->
+    <string name="search_icon">Search icon</string>
+    <string name="content_cinema_poster">Cinema poster</string>
+
+
+    <string name="background_image">Background image</string>
+
+    <!-- MovieDetails Screen -->
+    <string name="user_score">User Score</string>
+    <string name="overview">Overview</string>
+    <string name="top_billed_cast">Top Billed Cast</string>
+    <string name="error_getting_movie_info">Error getting movie information.</string>
+    <string name="released">Released</string>
+
 </resources>
