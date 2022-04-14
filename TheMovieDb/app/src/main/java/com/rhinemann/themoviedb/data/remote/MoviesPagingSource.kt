@@ -5,6 +5,7 @@ import androidx.paging.PagingState
 import com.rhinemann.themoviedb.data.remote.retrofit.the_movie_db.MoviesApi
 import com.rhinemann.themoviedb.data.remote.retrofit.the_movie_db.model.page.ApiMovie
 import retrofit2.HttpException
+import timber.log.Timber
 import java.io.IOException
 
 /**
@@ -16,7 +17,7 @@ class MoviesPagingSource(
 ) : PagingSource<Int, ApiMovie>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ApiMovie> {
-        val position = params.key ?: UNSPLASH_STARTING_PAGE_INDEX
+        val position = params.key ?: MOVIE_STARTING_PAGE_INDEX
 
         return try {
             val response = if (query.isNotBlank()) {
@@ -28,7 +29,7 @@ class MoviesPagingSource(
 
             LoadResult.Page(
                 data = movies,
-                prevKey = if (position == UNSPLASH_STARTING_PAGE_INDEX) null else position.minus(1),
+                prevKey = if (position == MOVIE_STARTING_PAGE_INDEX) null else position.minus(1),
                 nextKey = if (movies.isEmpty()) null else position.plus(1)
             )
         } catch (exception: IOException) {
@@ -39,10 +40,11 @@ class MoviesPagingSource(
     }
 
     override fun getRefreshKey(state: PagingState<Int, ApiMovie>): Int? {
-        return null
+        Timber.d("Position " + state.anchorPosition)
+        return state.anchorPosition
     }
 
     companion object {
-        private const val UNSPLASH_STARTING_PAGE_INDEX = 1
+        private const val MOVIE_STARTING_PAGE_INDEX = 1
     }
 }

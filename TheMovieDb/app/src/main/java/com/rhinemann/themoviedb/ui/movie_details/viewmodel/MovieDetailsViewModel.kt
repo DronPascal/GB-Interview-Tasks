@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.rhinemann.themoviedb.core.Result
 import com.rhinemann.themoviedb.data.remote.retrofit.the_movie_db.model.MovieId
 import com.rhinemann.themoviedb.domain.interactors.GetMovieDetailed
+import com.rhinemann.themoviedb.domain.models.Cast
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -23,10 +24,10 @@ class MovieDetailsViewModel @Inject constructor(
     val state: LiveData<MovieDetailsState> get() = _state
 
     fun onMovieIdReady(id: MovieId) {
-        loadMovieWithCredits(id)
+        loadMovieDetailed(id)
     }
 
-    private fun loadMovieWithCredits(id: MovieId) {
+    private fun loadMovieDetailed(id: MovieId) {
         getMovieDetailed.execute(id).onEach { detailsResult ->
             when (detailsResult) {
                 is Result.Success -> _state.value =
@@ -35,4 +36,21 @@ class MovieDetailsViewModel @Inject constructor(
             }
         }.launchIn(viewModelScope)
     }
+
+    fun onItemClick(cast: Cast) {
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

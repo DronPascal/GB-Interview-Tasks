@@ -50,6 +50,7 @@
         android:layout_marginTop="64dp"
         android:clipToPadding="false"
         android:orientation="vertical"
+        android:overScrollMode="never"
         android:paddingTop="@dimen/size_medium"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"

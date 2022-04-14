@@ -31,6 +31,10 @@ class MovieAdapter(private val listener: OnItemClickListener) :
         }
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return 1
+    }
+
     inner class PhotoViewHolder(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
 

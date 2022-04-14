@@ -24,15 +24,21 @@ class GetMovieSearchFlow @Inject constructor(
     fun execute(query: String): Flow<PagingData<Movie>> =
         Pager(
             config = PagingConfig(
-                pageSize = 20,
-                maxSize = 60,
-                enablePlaceholders = false,
-                prefetchDistance = 20,
-                initialLoadSize = 40
+                pageSize = TMD_API_PAGE_SIZE,
+                maxSize = MAX_CACHED_PAGES * TMD_API_PAGE_SIZE,
+                enablePlaceholders = true,
+                prefetchDistance = TMD_API_PAGE_SIZE,
+                initialLoadSize = INIT_LOAD_PAGES_NUMBER * TMD_API_PAGE_SIZE
             ),
             pagingSourceFactory = { MoviesPagingSource(movieApi, query) }
         ).flow
             .map { pagingData ->
                 pagingData.map { it.toEntity(urlProvider.baseImageUrl) }
             }
+
+    private companion object {
+        const val TMD_API_PAGE_SIZE = 20
+        const val MAX_CACHED_PAGES = 3
+        const val INIT_LOAD_PAGES_NUMBER = 2
+    }
 }

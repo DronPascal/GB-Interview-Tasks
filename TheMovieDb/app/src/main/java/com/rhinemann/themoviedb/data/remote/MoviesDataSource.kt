@@ -29,10 +29,10 @@ class MoviesDataSource @Inject constructor(
 
     override suspend fun getMovieDetails(id: MovieId): Result<ApiMovieDetailed, Throwable> =
         runOperationCatching { moviesApi.getMovieDetails(id) }
-            .doOnError { error -> Timber.e("getMovieDetails from server error", error) }
+            .doOnError { error -> Timber.e("get Movie details from server error", error) }
 
 
     override suspend fun getMovieCredits(id: MovieId): Result<ApiMovieCredits, Throwable> =
         runOperationCatching { moviesApi.getMovieCredits(id) }
-            .doOnError { error -> Timber.e("getMovieCredits from server error", error) }
+            .doOnError { error -> Timber.e("get Movie credits from server error", error) }
 }

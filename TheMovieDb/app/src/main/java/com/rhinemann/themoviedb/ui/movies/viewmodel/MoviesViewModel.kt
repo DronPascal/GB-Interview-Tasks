@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import androidx.paging.cachedIn
 import com.rhinemann.themoviedb.domain.interactors.GetMovieSearchFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
 @HiltViewModel
@@ -15,7 +16,9 @@ class MoviesViewModel @Inject constructor(
     private val currentQuery = savedStateHandle.getLiveData(CURRENT_QUERY, DEFAULT_QUERY)
 
     val movies = currentQuery.switchMap { queryString ->
-        getMovieFlow.execute(queryString).asLiveData().cachedIn(viewModelScope)
+        getMovieFlow.execute(queryString)
+            .asLiveData(context = Dispatchers.IO)
+            .cachedIn(viewModelScope)
     }
 
     fun searchMovies(query: String) {

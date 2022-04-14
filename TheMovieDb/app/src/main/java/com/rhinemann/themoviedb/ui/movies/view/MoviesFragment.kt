@@ -1,5 +1,6 @@
 package com.rhinemann.themoviedb.ui.movies.view
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -7,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import androidx.recyclerview.widget.ConcatAdapter
+import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.rhinemann.themoviedb.R
 import com.rhinemann.themoviedb.core.afterTextChanged
@@ -22,6 +25,15 @@ class MoviesFragment : Fragment(R.layout.fragment_movies), MovieAdapter.OnItemCl
 
     private val binding by viewBinding(FragmentMoviesBinding::bind)
     private val viewModel by viewModels<MoviesViewModel>()
+    private val adapter by lazy(LazyThreadSafetyMode.NONE) {
+        MovieAdapter(this)
+    }
+    private val headerAdapter by lazy(LazyThreadSafetyMode.NONE) {
+        MovieLoadStateAdapter { adapter.retry() }
+    }
+    private val footerAdapter by lazy(LazyThreadSafetyMode.NONE) {
+        headerAdapter
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,6 +48,7 @@ class MoviesFragment : Fragment(R.layout.fragment_movies), MovieAdapter.OnItemCl
             binding.ivSearchIcon.requestFocus()
 
             afterTextChanged { query: String ->
+                if (query.isBlank()) return@afterTextChanged
                 binding.rvMovies.scrollToPosition(0)
                 viewModel.searchMovies(query)
                 this.clearFocus()
@@ -45,23 +58,47 @@ class MoviesFragment : Fragment(R.layout.fragment_movies), MovieAdapter.OnItemCl
     }
 
     private fun initRecyclerView() {
-        val adapter = MovieAdapter(this)
+        val spanCount = when (resources.configuration.orientation) {
+            Configuration.ORIENTATION_LANDSCAPE -> 4
+            else -> 2
+        }
+        val concatAdapter = ConcatAdapter(
+            ConcatAdapter.Config.Builder().setIsolateViewTypes(false).build(),
+            adapter, headerAdapter, footerAdapter
+        )
 
         binding.apply {
+            rvMovies.adapter = adapter.withLoadStateHeaderAndFooter(
+                header = headerAdapter,
+                footer = footerAdapter
+            )
+
+            rvMovies.layoutManager = GridLayoutManager(requireContext(), spanCount).apply {
+                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                    override fun getSpanSize(position: Int): Int {
+                        return when (concatAdapter.getItemViewType(position)) {
+                            2 -> spanCount
+                            1 -> 1
+                            else -> -1
+                        }
+                    }
+                }
+            }
             rvMovies.setHasFixedSize(true)
             rvMovies.itemAnimator = null
-            rvMovies.adapter = adapter.withLoadStateHeaderAndFooter(
-                header = MovieLoadStateAdapter { adapter.retry() },
-                footer = MovieLoadStateAdapter { adapter.retry() }
-            )
+
             btnRetry.setOnClickListener { adapter.retry() }
         }
 
-        viewModel.movies.observe(viewLifecycleOwner) {
-            adapter.submitData(viewLifecycleOwner.lifecycle, it)
-        }
-
         adapter.addLoadStateListener { loadState ->
+            if (loadState.append.endOfPaginationReached) {
+                concatAdapter.addAdapter(headerAdapter)
+                concatAdapter.addAdapter(footerAdapter)
+            } else {
+                concatAdapter.removeAdapter(headerAdapter)
+                concatAdapter.removeAdapter(footerAdapter)
+            }
+
             binding.apply {
                 pbSearch.isVisible = loadState.source.refresh is LoadState.Loading
                 ivSearchIcon.isVisible = loadState.source.refresh is LoadState.NotLoading
@@ -80,6 +117,10 @@ class MoviesFragment : Fragment(R.layout.fragment_movies), MovieAdapter.OnItemCl
                     tvTypeSmth.isVisible = false
                 }
             }
+        }
+
+        viewModel.movies.observe(viewLifecycleOwner) {
+            adapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
     }
 

@@ -7,12 +7,13 @@ import com.rhinemann.themoviedb.data.local.core.MovieUrlProvider
 import com.rhinemann.themoviedb.data.remote.MoviesDataSource
 import com.rhinemann.themoviedb.data.remote.mappers.toEntity
 import com.rhinemann.themoviedb.data.remote.retrofit.the_movie_db.model.MovieId
-import com.rhinemann.themoviedb.domain.models.Cast
-import com.rhinemann.themoviedb.domain.models.Movie
-import com.rhinemann.themoviedb.domain.models.MovieDetailed
 import com.rhinemann.themoviedb.domain.models.MovieWithCast
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.isActive
 import javax.inject.Inject
 
 /**
@@ -23,7 +24,7 @@ class GetMovieDetailed @Inject constructor(
     private val urlProvider: MovieUrlProvider,
 ) {
 
-    suspend fun execute(id: MovieId): Flow<Result<MovieWithCast, Throwable>> =
+    fun execute(id: MovieId): Flow<Result<MovieWithCast, Throwable>> =
         flow {
             val result = getMovieDetailsWithCast(id)
             if (currentCoroutineContext().isActive) {
@@ -35,7 +36,7 @@ class GetMovieDetailed @Inject constructor(
         id: MovieId,
     ): Result<MovieWithCast, Throwable> =
         coroutineScope {
-            val movieDetailedCall = async {
+            val detailsCall = async {
                 movieSource.getMovieDetails(id)
                     .mapSuccess { entity -> entity.toEntity(urlProvider.baseImageUrl) }
             }
@@ -45,10 +46,10 @@ class GetMovieDetailed @Inject constructor(
 
             }
 
-            val movieDetailed = movieDetailedCall.await()
+            val details = detailsCall.await()
             val cast = castCall.await()
 
-            movieDetailed.mapNestedSuccess { movie ->
+            details.mapNestedSuccess { movie ->
                 cast.mapSuccess { cast ->
                     MovieWithCast(
                         movie = movie,

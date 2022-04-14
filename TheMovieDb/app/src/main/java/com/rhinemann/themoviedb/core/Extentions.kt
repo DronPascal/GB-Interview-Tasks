@@ -67,6 +67,10 @@ fun Fragment.showSystemMessage(text: String, longDuration: Boolean = false) {
     activity?.showSystemMessage(text, longDuration)
 }
 
+fun Fragment.showSnackbar(@StringRes stringRes: Int, duration: Int = Snackbar.LENGTH_SHORT) {
+    view?.showSnackbar(stringRes, duration)
+}
+
 fun View.toGone() {
     visibility = View.GONE
 }

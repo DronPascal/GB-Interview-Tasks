@@ -27,5 +27,7 @@
     <string name="user_score">User Score</string>
     <string name="overview">Overview</string>
     <string name="top_billed_cast">Top Billed Cast</string>
-    
+    <string name="error_getting_movie_info">Error getting movie information.</string>
+    <string name="released">Released</string>
+
 </resources>

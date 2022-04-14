@@ -25,6 +25,10 @@ class MovieLoadStateAdapter(private val retry: () -> Unit) :
         holder.bind(loadState)
     }
 
+    override fun getStateViewType(loadState: LoadState): Int {
+        return 2
+    }
+
     inner class LoadStateViewHolder(private val binding: ItemMovieLoadStateFooterBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
