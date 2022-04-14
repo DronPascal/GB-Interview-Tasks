@@ -18,9 +18,9 @@ data class ApiMovieDetailed(
     val poster_path: String,
     val production_companies: List<ApiProductionCompany>,
     val production_countries: List<ApiProductionCountry>,
-    val release_date: String,
+    val release_date: String?,  // "2015-05-13"
     val revenue: Int,
-    val runtime: Int,
+    val runtime: Int,  // 121 (min)
     val spoken_languages: List<ApiSpokenLanguage>,
     val status: String,
     val tagline: String,

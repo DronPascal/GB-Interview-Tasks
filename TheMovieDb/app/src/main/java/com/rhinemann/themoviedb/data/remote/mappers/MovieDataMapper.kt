@@ -1,8 +1,10 @@
 package com.rhinemann.themoviedb.data.remote.mappers
 
+import com.rhinemann.themoviedb.data.remote.retrofit.the_movie_db.model.detailed.ApiMovieDetailed
 import com.rhinemann.themoviedb.data.remote.retrofit.the_movie_db.model.page.ApiMovie
 import com.rhinemann.themoviedb.domain.models.Color
 import com.rhinemann.themoviedb.domain.models.Movie
+import com.rhinemann.themoviedb.domain.models.MovieDetailed
 import okhttp3.internal.toHexString
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
@@ -16,16 +18,35 @@ import kotlin.math.floor
 internal fun ApiMovie.toEntity(baseImageUrl: String): Movie = Movie(
     id = this.id,
     name = this.title.also { println(it) },
-    date = getFormatDate(this.release_date ?: ""),
     overview = this.overview,
-    rating = getRating100(this.vote_average).also { println("rating $it") },
+    date = getFormatDate(this.release_date ?: ""),
+    rating = getRating100(this.vote_average),
     ratingColorHex = getColorFromRating(getRating100(this.vote_average)),
     posterUrl = getImageUrl(baseImageUrl, this.poster_path),
     backgroundUrl = getImageUrl(baseImageUrl, this.backdrop_path)
 )
 
-private fun getImageUrl(baseImageUrl: String, posterPath: String?): String =
-    "${baseImageUrl}${posterPath}"
+internal fun ApiMovieDetailed.toEntity(baseImageUrl: String): MovieDetailed = MovieDetailed(
+    id = this.id,
+    name = this.title.also { println(it) },
+    overview = this.overview,
+    date = getFormatDate(this.release_date ?: ""),
+    runtime = getRuntimeText(this.runtime),
+    genres = this.genres.map { genre -> genre.name },
+    rating = getRating100(this.vote_average),
+    ratingColorHex = getColorFromRating(getRating100(this.vote_average)),
+    posterUrl = getImageUrl(baseImageUrl, this.poster_path),
+    backgroundUrl = getImageUrl(baseImageUrl, this.backdrop_path)
+)
+
+fun getRuntimeText(runtime: Int): String {
+    val hours = runtime / 60
+    val minutes = runtime - (hours * 60)
+    return if (hours == 0) "${minutes}min" else "${hours}h ${minutes}min"
+}
+
+internal fun getImageUrl(baseImageUrl: String, imagePath: String?): String =
+    "${baseImageUrl}${imagePath}"
 
 private fun getFormatDate(text: String): String {
     if (text.isBlank() || text.isEmpty()) return ""
