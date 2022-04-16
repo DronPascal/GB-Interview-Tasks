@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CarAnimation</string>
+    <string name="car_image">Car image</string>
 </resources>
