@@ -5,6 +5,8 @@
 
 Libraries:
 Jetpack Compose, [BezierSpline](https://github.com/Bw2801/bezier-spline-kotlin).
+
+[MainActivity.kt](https://github.com/DronPascal/GB-Interview-Tasks/blob/main/CarAnimation/app/src/main/java/com/rhinemann/caranimation/MainActivity.kt)
 </th>  
 <th>
 
